@@ -16,7 +16,8 @@
       "noImplicitReturns": true,                        /* Enable error reporting for codepaths that do not explicitly return in a function. */
       "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
     },
-    "include": ["src/**/*"],
+    "include": [
+      "fleet-management/src/**/*"
+    ],
     "exclude": ["node_modules"]
   }
-  
