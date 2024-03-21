@@ -24,7 +24,7 @@ export class CabinLayout {
                 width: this.dimension.width,
                 length: this.dimension.length
             },
-            parts: this.parts.map(part => part.toSnapshot())    // FIXME complete snapshot
+            parts: this.parts.map(part => part.toSnapshot())
         }
     }
 

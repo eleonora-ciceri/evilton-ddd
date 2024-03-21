@@ -24,6 +24,15 @@ export class Row {
         const seatWeight = this.seatType.seatWeight
         return this.seatMap.reduce((sum: Weight, seat: RowSpot) => sum.add((seat === RowSpot.Seat ? seatWeight : Weight.zero())), Weight.zero())
     }
+
+    toSnapshot() {
+        return {
+            id: this.id.value,
+            seatType: this.seatType.toSnapshot(),
+            seatMap: this.seatMap,
+            extraSpace: this.extraSpace.value
+        }
+    }
 }
 
 const thereAreAisles = (seatMap: RowSpot[]) => seatMap.indexOf(0) >= 0

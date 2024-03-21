@@ -9,4 +9,12 @@ export class CabinPart {
         private weight: Weight,
         private rows: Row[]
     ) { }
+
+    toSnapshot() {
+        return {
+            type: this.type,
+            weight: this.weight.value,
+            rows: this.rows.map(row => row.toSnapshot())
+        }
+    }
 }

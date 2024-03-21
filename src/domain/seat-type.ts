@@ -16,4 +16,12 @@ export class SeatType {
     get seatWeight(): Weight {
         return this.weight;
     }
+
+    toSnapshot() {
+        return {
+            id: this.id.value,
+            weight: this.weight.value,
+            pitch: this.pitch.value
+        }
+    }
 }
