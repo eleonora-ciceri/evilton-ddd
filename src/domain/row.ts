@@ -3,6 +3,7 @@ import {Length} from "./length";
 import {SeatType} from "./seat-type";
 import {RowSpot} from "./row-spot";
 import {Weight} from "./weight";
+import {s} from "vitest/dist/reporters-P7C2ytIv";
 
 export class Row {
     constructor(
@@ -18,6 +19,15 @@ export class Row {
         if (leftWindowSeat(seatMap) == RowSpot.Aisle || rightWindowSeat(seatMap) === RowSpot.Aisle) {
             throw Error('you need to have seats close to the window')
         }
+    }
+
+    static fromSnapshot(snapshot: { id: string; seatType: { id: string; weight: number; pitch: number; }; seatMap: RowSpot[]; extraSpace: number; }) {
+        return new Row(
+            new Id(snapshot.id),
+            SeatType.fromSnapshot(snapshot.seatType),
+            snapshot.seatMap,
+            new Length(snapshot.extraSpace)
+        )
     }
 
     get weight(): Weight {

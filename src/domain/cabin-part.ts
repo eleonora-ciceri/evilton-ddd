@@ -10,6 +10,14 @@ export class CabinPart {
         private rows: Row[]
     ) { }
 
+    static fromSnapshot(snapshot: { type: CabinPartType; weight: number; rows: any[]; }) {
+        return new CabinPart(
+            snapshot.type,
+            new Weight(snapshot.weight),
+            snapshot.rows.map(row => Row.fromSnapshot(row))
+        )
+    }
+
     toSnapshot() {
         return {
             type: this.type,

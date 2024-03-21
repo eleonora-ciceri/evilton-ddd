@@ -1,12 +1,10 @@
 import {CabinLayoutRepository} from "../../domain/cabin-layout-repository";
 import {CabinLayout} from "../../domain/cabin-layout";
-import {CabinLayoutsDAL} from "../../data-access/cabin-layouts-dal";
 import {Pool} from "pg";
 import {Id} from "../../domain/id";
 
 export class PostgresCabinLayoutRepository implements CabinLayoutRepository {
     constructor(
-        public dal: CabinLayoutsDAL,
         public pool: Pool
     ) { }
 
@@ -24,15 +22,11 @@ export class PostgresCabinLayoutRepository implements CabinLayoutRepository {
         const res = await this.pool.query(query, [id.value]);
 
         if (res.rows.length) {
-            return this.map(res.rows[0].layout_data);
+            const snapshot = res.rows[0].layout_data
+            return CabinLayout.fromSnapshot(snapshot)
         } else {
             return null;
         }
-    }
-
-    private map(unitData: any): CabinLayout {
-        const result = unitData as CabinLayout;
-        return result
     }
 
 }

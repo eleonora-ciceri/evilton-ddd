@@ -13,6 +13,14 @@ export class SeatType {
         this.pitch = pitch
     }
 
+    static fromSnapshot(snapshot: { id: string; weight: number; pitch: number; }) {
+        return new SeatType(
+            new Id(snapshot.id),
+            new Weight(snapshot.weight),
+            new Length(snapshot.pitch)
+        )
+    }
+
     get seatWeight(): Weight {
         return this.weight;
     }
