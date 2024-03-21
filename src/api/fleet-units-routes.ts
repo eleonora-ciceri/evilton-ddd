@@ -1,8 +1,8 @@
 import express from 'express';
 import { pool } from '../data-access/db';
-import { FleetUnit } from '../model/fleet-unit';
+import { FleetUnit } from '../domain/fleet-unit';
 import { FleetUnitsDAL } from '../data-access/fleet-units-dal';
-import { FleetUnits } from '../app/fleet-units';
+import { FleetUnits } from '../application/fleet-units';
 
 export const router = express.Router();
 
@@ -51,7 +51,7 @@ router.put('/:id', async (req, res) => {
 
     let fleetUnit = req.body as FleetUnit;
     fleetUnit.version = expectedVersion;
-    
+
     if (req.params.id != fleetUnit.tailNumber) {
         return res.status(400).json({ message: "Invalid tail number in request body" });
     }

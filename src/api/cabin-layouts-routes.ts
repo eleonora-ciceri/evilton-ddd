@@ -1,8 +1,8 @@
 import express from 'express';
 import { pool, query } from '../data-access/db';
-import { CabinLayout } from '../model/cabin-layout';
+import { CabinLayout } from '../domain/cabin-layout';
 import { CabinLayoutsDAL } from '../data-access/cabin-layouts-dal';
-import { CabinLayouts } from '../app/cabin-layouts';
+import { CabinLayouts } from '../application/cabin-layouts';
 
 export const router = express.Router();
 
@@ -69,7 +69,7 @@ async function isLayoutValid(layout: CabinLayout): Promise<boolean> {
     }
 
     let seatTypes = (await query('SELECT * FROM fleetops.seat_types')).rows;
-    
+
     function getWidth(seatTypeId: string): number {
         return seatTypes.find(st => st.seat_type_id === seatTypeId)?.width_cm || 0;
     }
