@@ -6,6 +6,7 @@
   "author": "",
   "license": "ISC",
   "workspaces": [
-    "fleet-management"
+    "fleet-management",
+    "booking-system"
   ]
 }
